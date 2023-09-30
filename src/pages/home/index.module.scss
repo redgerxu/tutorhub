@@ -1,0 +1,32 @@
+@import "../../app/variables.module.scss";
+
+.container {
+  padding: 1em;
+}
+
+.section {
+  padding: 1em;
+}
+
+.postContainer {
+  display: inline-block;
+  padding: 0.5em;
+  height: 10em;
+}
+
+.post {
+  padding: 1em;
+  width: 25em;
+  height: 100%;
+  border-radius: 0.5em;
+  border: 2px solid darken($color: $background-color, $amount: 10);
+  overflow: hidden;
+  position: relative;
+}
+
+.bottomleft {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  margin: 1em;
+}

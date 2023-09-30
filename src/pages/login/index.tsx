@@ -5,8 +5,9 @@ import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
 } from "firebase/auth";
-import { auth } from "@/firebase";
+import { auth, db } from "@/firebase";
 import { useRouter } from "next/router";
+import { doc, setDoc } from "firebase/firestore";
 
 export default function Login() {
   const router = useRouter();
@@ -31,7 +32,12 @@ export default function Login() {
 
     if (registering) {
       createUserWithEmailAndPassword(auth, email, password)
-        .then(() => {
+        .then((userCredential) => {
+          setDoc(doc(db, "users/" + userCredential.user.uid), {
+            id: userCredential.user.uid,
+            name: email,
+            email: email,
+          });
           router.push("/home");
         })
         .catch((err) => {

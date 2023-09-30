@@ -1,6 +1,7 @@
 export interface User {
   id: string;
   name: string;
+  email: string;
 }
 
 export interface Post {
@@ -8,6 +9,7 @@ export interface Post {
   content: string;
   upvotes: User[];
   downvotes: User[];
+  author: string; // user id
 }
 
 export interface Comment {
