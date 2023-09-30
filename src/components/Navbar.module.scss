@@ -1,0 +1,25 @@
+@import "../app/variables.module.scss";
+
+.container {
+  display: inline-block;
+  width: 100%;
+  background-color: $primary-color;
+  height: fit-content;
+}
+
+.navlink {
+  float: left;
+  display: block;
+  padding: 1.5em;
+  height: 100%;
+
+  color: $text-white;
+}
+
+.navlink:hover {
+  background-color: darken($color: $primary-color, $amount: 10);
+}
+.navlink a {
+  color: inherit;
+  text-decoration: none;
+}

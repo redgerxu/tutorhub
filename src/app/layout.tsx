@@ -1,4 +1,5 @@
 import "@/app/globals.css";
+import styles from "./layout.module.scss";
 
 import { Inter } from "next/font/google";
 import Navbar from "@/components/Navbar";
@@ -10,7 +11,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <div className={inter.className}>
+    <div className={`${inter.className} ${styles.container}`}>
       <Navbar />
       {children}
     </div>
