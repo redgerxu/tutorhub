@@ -1,22 +1,62 @@
 import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import styles from "./index.module.scss";
 import Link from "next/link";
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from "firebase/auth";
+import { auth } from "@/firebase";
+import { useRouter } from "next/router";
 
 export default function Login() {
-  const [username, setUsername] = useState("");
+  const router = useRouter();
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [registering, setRegistering] = useState(false);
 
-  function submit() {
-    alert(username + password);
+  function submit(e: SubmitEvent) {
+    e.preventDefault();
+
+    const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
+
+    if (!emailRegex.test(email)) {
+      alert("Invalid email");
+      return;
+    }
+
+    if (password.length < 8) {
+      alert("Password is too short");
+      return;
+    }
+
+    if (registering) {
+      createUserWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          router.push("/home");
+        })
+        .catch((err) => {
+          console.error(err);
+          console.log("QUER");
+          alert("This account already exists, try signing in");
+        });
+    } else {
+      signInWithEmailAndPassword(auth, email, password)
+        .then(() => {
+          router.push("/home");
+        })
+        .catch((err) => {
+          console.error(err);
+          alert("Incorrect email/password");
+        });
+    }
   }
 
-  const changeUsername: ChangeEventHandler<HTMLInputElement> = (
+  const changeEmail: ChangeEventHandler<HTMLInputElement> = (
     e: ChangeEvent<HTMLInputElement>
   ) => {
     const { value } = e.target;
 
-    setUsername(value);
+    setEmail(value);
   };
 
   const changePassword: ChangeEventHandler<HTMLInputElement> = (
@@ -38,9 +78,9 @@ export default function Login() {
         <form>
           <input
             type="text"
-            placeholder="Username"
-            value={username}
-            onChange={changeUsername}
+            placeholder="Email"
+            value={email}
+            onChange={changeEmail}
             required
           />
           <input

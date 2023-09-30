@@ -1,5 +1,7 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 import type { Post, Response } from "../../types";
+import { addDoc, collection } from "firebase/firestore";
+import { db } from "@/firebase";
 
 export default async function handler(
   req: NextApiRequest,
@@ -7,10 +9,14 @@ export default async function handler(
 ) {
   if (req.method === "POST") {
     try {
-      const data = JSON.parse(req.body) as Post;
+      const data = req.body as Post;
+
+      const posts = collection(db, "tutorials");
+
+      const doc = await addDoc(posts, data);
 
       res.status(200).json({
-        message: "Data received successfully",
+        message: doc.id,
         error: undefined,
       });
     } catch (error) {
@@ -18,6 +24,8 @@ export default async function handler(
         error: "An error occurred",
         message: "",
       });
+
+      console.error(error);
     }
   } else {
     res.status(405).json({

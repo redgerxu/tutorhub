@@ -4,15 +4,15 @@ export interface User {
 }
 
 export interface Post {
-  Title: string;
-  Content: string;
-  Upvotes: User[];
-  Downvotes: User[];
+  title: string;
+  content: string;
+  upvotes: User[];
+  downvotes: User[];
 }
 
 export interface Comment {
-  Parent: Post;
-  Content: string;
+  parent: Post;
+  content: string;
 }
 
 export type Response = {
