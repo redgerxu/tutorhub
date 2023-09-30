@@ -1,0 +1,18 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  grid-column-gap: 0px;
+  grid-row-gap: 0px;
+  grid-template-areas: repeat(5, "link");
+}
+
+.navlink {
+  padding: 0.25em;
+  color: --text-color;
+  grid-area: link;
+}
+
+.navlink a {
+  color: inherit;
+  text-decoration: none;
+}
