@@ -1,5 +1,6 @@
 import { ChangeEvent, ChangeEventHandler, useState } from "react";
 import styles from "./index.module.scss";
+import Link from "next/link";
 
 export default function Login() {
   const [username, setUsername] = useState("");
@@ -26,6 +27,10 @@ export default function Login() {
     setPassword(value);
   };
 
+  function switchRegistering() {
+    setRegistering(!registering);
+  }
+
   return (
     <div className={styles.container}>
       <div className={styles.login}>
@@ -49,6 +54,24 @@ export default function Login() {
             {registering ? "Register" : "Login"}
           </button>
         </form>
+
+        <div className={styles.bottomleft}>
+          {registering ? (
+            <>
+              Have an account?{" "}
+              <Link onClick={switchRegistering} href={""}>
+                Log in here.
+              </Link>
+            </>
+          ) : (
+            <>
+              Need an account?{" "}
+              <Link onClick={switchRegistering} href={""}>
+                Sign up here.
+              </Link>
+            </>
+          )}
+        </div>
       </div>
     </div>
   );
