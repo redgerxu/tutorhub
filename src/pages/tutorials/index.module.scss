@@ -9,19 +9,30 @@
 }
 
 .postContainer {
-  display: inline-block;
+  display: block;
+  white-space: nowrap;
   padding: 0.5em;
-  height: 10em;
+  height: fit-content;
+  overflow-x: auto;
 }
 
 .post {
+  display: inline-block;
   padding: 1em;
   width: 25em;
+  min-height: 10em;
+  max-width: 23em;
   height: 100%;
   border-radius: 0.5em;
   border: 2px solid darken($color: $background-color, $amount: 10);
   overflow: hidden;
   position: relative;
+  margin-right: 2em;
+  box-sizing: content-box;
+}
+
+.post:hover {
+  transform: scale(1.05); /* Scale the post by 5% on hover */
 }
 
 .bottomleft {

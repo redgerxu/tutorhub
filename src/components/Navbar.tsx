@@ -65,9 +65,6 @@ export default function Navbar() {
         <NavLink link="/" classes={[styles.left, styles.logo]}>
           TutorHub
         </NavLink>
-        <NavLink link="/home" classes={[styles.left]}>
-          Home
-        </NavLink>
         <NavLink link="/tutorials" classes={[styles.left]}>
           Tutorials
         </NavLink>

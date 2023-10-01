@@ -35,10 +35,10 @@ export default function Login() {
         .then((userCredential) => {
           setDoc(doc(db, "users/" + userCredential.user.uid), {
             id: userCredential.user.uid,
-            name: email,
+            name: email.split("@")[0],
             email: email,
           });
-          router.push("/home");
+          router.push("/tutorials");
         })
         .catch((err) => {
           console.error(err);
@@ -48,7 +48,7 @@ export default function Login() {
     } else {
       signInWithEmailAndPassword(auth, email, password)
         .then(() => {
-          router.push("/home");
+          router.push("/tutorials");
         })
         .catch((err) => {
           console.error(err);
