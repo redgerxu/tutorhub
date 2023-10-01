@@ -1,17 +1,25 @@
 @import "../app/variables.module.scss";
 
 .container {
-  display: inline-block;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   width: 100%;
   background-color: $primary-color;
   height: fit-content;
 }
 
+.sulobtn {
+  text-decoration: none;
+  font-size: 1.25em;
+  background-color: $primary-color;
+}
+
 .navlink {
-  float: left;
   display: block;
   padding: 1.5em;
   height: 100%;
+  border-radius: 1em;
 
   color: $text-white;
 }
@@ -19,7 +27,22 @@
 .navlink:hover {
   background-color: darken($color: $primary-color, $amount: 10);
 }
+
 .navlink a {
   color: inherit;
   text-decoration: none;
+  font-size: 1.25em;
+}
+
+.logo {
+  font-weight: bold;
+  font-size: 1.25em;
+}
+
+.left {
+  float: left;
+}
+
+.right {
+  float: right;
 }

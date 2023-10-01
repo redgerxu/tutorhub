@@ -1,3 +1,10 @@
+@import "../app/variables.module.scss";
+
+@font-face {
+  font-family: "Salsa";
+  src: url("/fonts/Salsa/Salsa-Regular.ttf") format("truetype");
+}
+
 .main {
   width: 100%;
   height: 100%;
@@ -8,15 +15,47 @@
   grid-row-gap: 0px;
 }
 
-.center {
-  margin-left: auto;
-  margin-right: auto;
+.signupbtn {
+  color: $text-white;
+  background-color: $primary-color;
+  padding: 1em;
+  border-radius: 1em;
+  font-size: 1.25em;
+  border: 0;
 }
 
-.title h1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.title {
   width: 100%;
   height: 100%;
+  font-family: "Salsa", sans-serif;
+  text-align: center;
+}
+
+.row {
+  height: 15em;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.row ::after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+.left-half,
+.right-half {
+  width: 50%;
+  height: 100%;
+  float: left;
+}
+
+.left-half {
+  background-color: #f2f2f2;
+}
+
+.right-half {
+  background-color: #ddd;
 }

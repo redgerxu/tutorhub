@@ -1,4 +1,4 @@
-import { ChangeEvent, ChangeEventHandler, useState } from "react";
+import { ChangeEvent, ChangeEventHandler, FormEvent, useState } from "react";
 import styles from "./index.module.scss";
 import Link from "next/link";
 import {
@@ -15,7 +15,7 @@ export default function Login() {
   const [password, setPassword] = useState("");
   const [registering, setRegistering] = useState(false);
 
-  function submit(e: SubmitEvent) {
+  function submit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const emailRegex = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
@@ -81,7 +81,7 @@ export default function Login() {
     <div className={styles.container}>
       <div className={styles.login}>
         <h2>{registering ? "Register" : "Login"}</h2>
-        <form>
+        <form onSubmit={submit}>
           <input
             type="text"
             placeholder="Email"
@@ -96,9 +96,7 @@ export default function Login() {
             onChange={changePassword}
             required
           />
-          <button type="submit" onClick={submit}>
-            {registering ? "Register" : "Login"}
-          </button>
+          <button type="submit">{registering ? "Register" : "Login"}</button>
         </form>
 
         <div className={styles.bottomleft}>
