@@ -26,6 +26,7 @@ function Post(props: Post) {
     }
 
     getData();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -75,6 +76,7 @@ export default function TutorialHome() {
     category: string,
     setStateFunction: Dispatch<SetStateAction<Post[]>>
   ) => {
+    console.log(category);
     try {
       const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(
         query(collection(db, "posts"), where("category", "==", category))
@@ -95,6 +97,7 @@ export default function TutorialHome() {
 
   // Fetch recent posts based on IDs
   const fetchRecentPosts = async (recentPostIds: string[]) => {
+    if (recentPostIds.length == 0) return;
     try {
       const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(
         query(collection(db, "posts"), where("id", "in", recentPostIds))
@@ -128,7 +131,14 @@ export default function TutorialHome() {
 
   return (
     <div className={styles.container}>
-      <h1>Tutorials For You</h1>
+      <div className={styles.header}>
+        <h1 style={{ float: "left", flex: 1 }}>Tutorials For You</h1>
+        <h2 style={{ right: 0 }}>
+          <Link href="/tutorials/create" style={{ textDecoration: "none" }}>
+            Create Your Own
+          </Link>
+        </h2>
+      </div>
       <Section title="Recently Viewed" posts={recentPosts} />
       <Section title={Categories.Science} posts={sciencePosts} />
       <Section title={Categories.Math} posts={mathPosts} />

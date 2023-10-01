@@ -1,8 +1,18 @@
+@import "../../app/variables.module.scss";
+
+.supercontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
 .container {
-  max-width: 800px;
+  width: 60em;
   margin: 0 auto;
   padding: 20px;
-  background-color: #fff;
+  background-color: $background-color;
   border-radius: 5px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
 }
@@ -10,12 +20,12 @@
 .container h1 {
   text-align: center;
   margin-top: 20px;
-  color: #fff;
+  color: $text-color;
 }
 
 .container form {
   padding: 20px;
-  background: #fff;
+  background: $background-color;
 }
 
 .container label {
@@ -39,7 +49,7 @@
   display: block;
   margin: 20px auto;
   background-color: #e74c3c;
-  color: #fff;
+  color: $text-color;
 
   border: none;
   border-radius: 5px;
@@ -53,11 +63,11 @@
   background-color: #c0392b;
 }
 
-input[type="submit"] {
+.container input[type="submit"] {
   display: block;
   margin-top: 20px;
   background-color: #e74c3c;
-  color: #fff;
+  color: $text-white;
   border: none;
   border-radius: 5px;
   padding: 10px 20px;
@@ -66,6 +76,22 @@ input[type="submit"] {
   transition: background-color 0.3s;
 }
 
-input[type="submit"]:hover {
+.container input[type="submit"]:hover {
   background-color: #c0392b;
+}
+
+.container select {
+  width: 25%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  appearance: none; /* Remove default styles */
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.container select:hover {
+  border-color: #555;
 }

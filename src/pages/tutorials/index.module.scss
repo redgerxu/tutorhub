@@ -4,6 +4,11 @@
   padding: 1em;
 }
 
+.header {
+  display: flex;
+  align-items: center; /* Vertically center align the content */
+}
+
 .section {
   padding: 1em;
 }
