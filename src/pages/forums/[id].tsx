@@ -1,6 +1,6 @@
 import { auth, db } from "@/firebase";
-import { Comment, Post, User as U } from "@/types";
-import { collection, doc, getDoc, updateDoc } from "firebase/firestore";
+import { Post, User as U } from "@/types";
+import { doc, getDoc, updateDoc } from "firebase/firestore";
 import { useParams } from "next/navigation";
 import { useRouter } from "next/router";
 import { ChangeEvent, useEffect, useState } from "react";
@@ -70,21 +70,21 @@ export default function ForumPage() {
     const id = params ? params["id"] : undefined;
 
     if (!id) {
-      router.push("/forums");
+      return;
     }
 
     async function getData() {
       const stuff = await getDoc(doc(db, "/posts/" + id));
 
-      if (!stuff.exists) {
-        router.replace("/404");
+      if (!stuff.exists()) {
+        return;
       }
 
       const stuffs = stuff.data();
 
       if (!stuffs) {
-        router.replace("/404");
         console.error("Forum " + id + " not found");
+        return;
       }
 
       const temp = stuffs as Post;

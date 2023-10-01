@@ -21,17 +21,16 @@ export default function TutorialView() {
     }
 
     async function getData() {
-
-      const tutorialDoc = await getDoc(doc(db, "tutorials/" + id));
+      const tutorialDoc = await getDoc(doc(db, "/tutorials/" + id));
 
       if (!tutorialDoc.exists()) {
-        router.replace("/404");
+        return;
       }
 
       const tutorialData = tutorialDoc.data();
 
       if (!tutorialData) {
-        router.replace("/404");
+        return;
       }
 
       setData(tutorialData as Post);
