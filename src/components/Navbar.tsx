@@ -4,7 +4,7 @@ import Link from "next/link";
 import styles from "./Navbar.module.scss";
 import { auth } from "@/firebase";
 import { User, onAuthStateChanged, signOut } from "firebase/auth";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function NavLink({
   children,
@@ -52,9 +52,15 @@ function SignUpLogOut({ user }: { user: User | null }) {
 export default function Navbar() {
   const [user, setUser] = useState<User | null>(null);
 
-  onAuthStateChanged(auth, (u) => {
-    setUser(u);
-  });
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user: User | null) => {
+        setUser(user);
+    });
+
+    return () => {
+      unsubscribe();
+    };
+  }, []);
 
   return (
     <div className={styles.container}>

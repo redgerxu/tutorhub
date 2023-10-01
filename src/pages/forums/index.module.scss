@@ -1,0 +1,18 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 5em;
+  height: 100%;
+}
+
+.postContainer {
+  width: 100%;
+}
+
+.post {
+  display: flex;
+  align-items: center; /* Vertically center align the content */
+
+  border-radius: 0.5em;
+  padding: 1em;
+}

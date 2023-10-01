@@ -37,12 +37,12 @@ function Post(props: Post) {
       <div className={styles.post}>
         <h3>{props.title}</h3>
         <p>
-          {props.content.length > 42
+          {(props.content ?? "").length > 42
             ? props.content.slice(0, 42) + "..."
             : props.content}
         </p>
         {author ? (
-          <div className={styles.bottomleft}>{author.name}</div>
+          <div className={styles.bottomleft}>By {author.name}</div>
         ) : (
           <></>
         )}
@@ -76,17 +76,16 @@ export default function TutorialHome() {
     category: string,
     setStateFunction: Dispatch<SetStateAction<Post[]>>
   ) => {
-    console.log(category);
     try {
       const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(
-        query(collection(db, "posts"), where("category", "==", category))
+        query(collection(db, "tutorials"), where("category", "==", category))
       );
 
       const postsData: Post[] = [];
 
       querySnapshot.forEach((doc) => {
         const postData: Post = doc.data() as Post;
-        postsData.push(postData);
+        postsData.push({ ...postData, id: doc.id });
       });
 
       setStateFunction(postsData);
@@ -95,38 +94,42 @@ export default function TutorialHome() {
     }
   };
 
-  // Fetch recent posts based on IDs
-  const fetchRecentPosts = async (recentPostIds: string[]) => {
-    if (recentPostIds.length == 0) return;
-    try {
-      const querySnapshot: QuerySnapshot<DocumentData> = await getDocs(
-        query(collection(db, "posts"), where("id", "in", recentPostIds))
-      );
-
-      const recentPostsData: Post[] = [];
-
-      querySnapshot.forEach((doc) => {
-        const postData: Post = doc.data() as Post;
-        recentPostsData.push(postData);
-      });
-
-      setRecentPosts(recentPostsData);
-    } catch (error) {
-      console.error("Error fetching recent posts: ", error);
+  function fetchRecentPosts(recentPostIds: string[]) {
+    if (recentPostIds.length === 0) {
+      return;
     }
-  };
+
+    const postRefs = recentPostIds.map((postId) =>
+      doc(db, "tutorials", postId)
+    );
+
+    postRefs.forEach(async (ref) => {
+      const stuffs = await getDoc(ref);
+      const postData: Post = stuffs.data() as Post;
+      setRecentPosts([...recentPosts, { ...postData, id: ref.id }]);
+    });
+  }
 
   useEffect(() => {
     const recentPostIds: string[] = JSON.parse(
       Cookies.get("recentPostIds") ?? "[]"
     );
 
-    fetchRecentPosts(recentPostIds);
-    fetchPostsByCategory(Categories.Science, setSciencePosts);
-    fetchPostsByCategory(Categories.Math, setMathPosts);
-    fetchPostsByCategory(Categories.History, setHistoryPosts);
-    fetchPostsByCategory(Categories.English, setEnglishPosts);
-    fetchPostsByCategory(Categories.Other, setOtherPosts);
+    async function fetchStuff() {
+      await fetchRecentPosts(recentPostIds);
+
+      await fetchPostsByCategory(Categories.Science, setSciencePosts);
+
+      await fetchPostsByCategory(Categories.Math, setMathPosts);
+
+      await fetchPostsByCategory(Categories.History, setHistoryPosts);
+
+      await fetchPostsByCategory(Categories.English, setEnglishPosts);
+
+      await fetchPostsByCategory(Categories.Other, setOtherPosts);
+    }
+
+    fetchStuff();
   }, []);
 
   return (

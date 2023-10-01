@@ -6,6 +6,12 @@ export enum Categories {
   Other = "Other",
 }
 
+export enum Type {
+  Tutorial = 0,
+  Forum = 1,
+  Comment = 2,
+}
+
 export interface User {
   id: string;
   name: string;
@@ -18,13 +24,15 @@ export interface Post {
   upvotes: User[];
   downvotes: User[];
   author: string; // user id
-  comments: string[];
+  comments: Comment[];
   category: Categories;
   id: string;
+  type: Type;
 }
 
 export interface Comment {
   parent: Post;
+  author: string;
   content: string;
   id: string;
 }

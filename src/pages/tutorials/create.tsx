@@ -2,7 +2,7 @@ import { ChangeEvent, useEffect, useState } from "react";
 import styles from "./Create.module.scss";
 import { addDoc, collection } from "firebase/firestore";
 import { auth, db } from "@/firebase";
-import { Categories, Post } from "@/types";
+import { Categories, Post, Type } from "@/types";
 import { useRouter } from "next/router";
 import { User } from "firebase/auth";
 
@@ -68,9 +68,12 @@ export default function Create() {
         comments: [],
         author: currentUser.uid,
         category: selectedCategory as Categories,
+        type: Type.Tutorial,
       };
 
-      await addDoc(tutorialsRef, newTutorial);
+      const ref = await addDoc(tutorialsRef, newTutorial);
+
+      router.push("/tutorials/" + ref.id);
     } catch (error) {
       console.error("Error creating tutorial:", error);
     }

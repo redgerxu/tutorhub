@@ -21,6 +21,7 @@ export default function TutorialView() {
     }
 
     async function getData() {
+
       const tutorialDoc = await getDoc(doc(db, "tutorials/" + id));
 
       if (!tutorialDoc.exists()) {
@@ -48,5 +49,13 @@ export default function TutorialView() {
     getData();
   }, [params, router]);
 
-  return <div className={styles.container}></div>;
+  if (data) {
+    return (
+      <div className={styles.container}>
+        <h1>{data.title}</h1>
+        <p dangerouslySetInnerHTML={{ __html: data.content }} />
+      </div>
+    );
+  }
+  return <></>;
 }

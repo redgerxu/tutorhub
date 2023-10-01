@@ -1,0 +1,97 @@
+@import "../../app/variables.module.scss";
+
+.supercontainer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 80vh;
+}
+
+.container {
+  width: 60em;
+  margin: 0 auto;
+  padding: 20px;
+  background-color: $background-color;
+  border-radius: 5px;
+  box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.2);
+}
+
+.container h1 {
+  text-align: center;
+  margin-top: 20px;
+  color: $text-color;
+}
+
+.container form {
+  padding: 20px;
+  background: $background-color;
+}
+
+.container label {
+  font-weight: bold;
+  display: block;
+  margin-top: 10px;
+  color: #333;
+}
+
+.container input[type="text"],
+.container textarea {
+  width: 100%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.container input[type="file"] {
+  display: block;
+  margin: 20px auto;
+  background-color: #e74c3c;
+  color: $text-color;
+
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.container input[type="file"]:hover {
+  background-color: #c0392b;
+}
+
+.container input[type="submit"] {
+  display: block;
+  margin-top: 20px;
+  background-color: #e74c3c;
+  color: $text-white;
+  border: none;
+  border-radius: 5px;
+  padding: 10px 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.container input[type="submit"]:hover {
+  background-color: #c0392b;
+}
+
+.container select {
+  width: 25%;
+  padding: 10px;
+  margin-top: 5px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 16px;
+  appearance: none; /* Remove default styles */
+  background-color: #fff;
+  cursor: pointer;
+}
+
+.container select:hover {
+  border-color: #555;
+}
