@@ -1,5 +1,18 @@
 import styles from "./page.module.scss";
 
+function SignUpButton() {
+  return (
+    <button
+      className={styles.signupbtn}
+      onClick={() => {
+        window.location.href = "/login";
+      }}
+    >
+      Sign Up Today!
+    </button>
+  );
+}
+
 export default function Home() {
   const sections = [
     {
@@ -38,7 +51,7 @@ export default function Home() {
           </div>
         </div>
       ))}
-      <button className={styles.signupbtn}>Sign Up Today!</button>
+      <SignUpButton />
     </div>
   );
 }
